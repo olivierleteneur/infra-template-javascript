@@ -1,20 +1,17 @@
-'use strict';
+// Module ES : le mode strict est implicite, 'use strict' est inutile.
 
 /**
- * @description Exécute un traitement standardisé avec gestion d'erreur.
- * @param {string} payload - Donnée d'entrée requise.
- * @returns {boolean} État de l'exécution.
+ * @description Exécute un traitement standardisé avec validation de l'entrée.
+ * @param {string} payload - Donnée d'entrée requise, chaîne non vide.
+ * @returns {string} Résultat du traitement.
+ * @throws {TypeError} Si payload n'est pas une chaîne non vide.
  */
 const processPayload = (payload) => {
-    if (!payload) throw new Error("Le paramètre payload est requis.");
-    
-    try {
-        console.log(`Traitement : ${payload}`);
-        return true;
-    } catch (error) {
-        console.error("Échec du traitement :", error);
-        return false;
+    if (typeof payload !== 'string' || payload.trim() === '') {
+        throw new TypeError('Le paramètre payload doit être une chaîne non vide.');
     }
+
+    return `Traitement : ${payload}`;
 };
 
 export { processPayload };
